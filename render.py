@@ -221,8 +221,10 @@ def pic_missile(x0, y0, w, h):
         d.ellipse([x0 + sx, y0 + sy, x0 + sx + 3, y0 + sy + 3],
                   fill=(255, 255, 255))
     d.ellipse([x0 + 396, y0 + 10, x0 + 432, y0 + 46], fill=(235, 225, 190))
-    # missile rising diagonally from the launcher
-    mx, my = x0 + 190, y0 + 66
+    # missile rising from the launcher, raised so its exhaust is visible
+    # in the gap between the missile base and the launcher (the old flame
+    # sat below the pictogram edge and was clipped invisible)
+    mx, my = x0 + 190, y0 + 40
     d.polygon([(mx - 12, my + 26), (mx - 12, my - 18), (mx, my - 36),
                (mx + 12, my - 18), (mx + 12, my + 26)], fill=(210, 214, 222))
     d.polygon([(mx - 12, my - 18), (mx - 24, my + 2), (mx - 12, my + 2)],
@@ -230,12 +232,9 @@ def pic_missile(x0, y0, w, h):
     d.polygon([(mx + 12, my - 18), (mx + 24, my + 2), (mx + 12, my + 2)],
               fill=(178, 34, 34))
     d.rectangle([mx - 12, my + 6, mx + 12, my + 14], fill=(178, 34, 34))
-    # exhaust flame and smoke trail
-    flame(d, mx, my + 46, 1.0, (255, 176, 32))
-    flame(d, mx, my + 58, 0.6, (255, 110, 30))
-    for i, r in enumerate((4, 6, 8)):
-        d.ellipse([mx - r, my + 66 + i * 10, mx + r, my + 66 + i * 10 + r * 2],
-                  fill=(170, 168, 162))
+    # exhaust flame in the gap between missile base and launcher
+    flame(d, mx, my + 36, 0.7, (255, 176, 32))
+    flame(d, mx, my + 44, 0.45, (255, 110, 30))
     # launcher vehicle on the ground
     d.rectangle([x0 + 120, y0 + 88, x0 + 260, y0 + 100], fill=(52, 58, 50))
     d.ellipse([x0 + 140, y0 + 96, x0 + 162, y0 + 108], fill=(20, 20, 22))
